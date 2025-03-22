@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using System.Data;
 using Dapper;
+using MySqlConnector;
 
 namespace cmr_pecas_acessorios_api.Controllers;
 
@@ -25,15 +25,16 @@ public class WeatherForecastController : ControllerBase
     public IEnumerable<WeatherForecast> Get()
     {
 
+     
 
-        string connectionString = "Server=SEU_SERVIDOR;Database=SUA_BASE;User Id=USUARIO;Password=SENHA;";
-        using IDbConnection db = new SqlConnection(connectionString);
+        string connectionString = "Server=localhost;Port=3306;Database=world;User Id=root;Password=080205;";
+        using IDbConnection db = new MySqlConnection(connectionString);
 
-        var clientes = db.Query<object>("SELECT * FROM Clientes");
+        var clientes = db.Query<object>("SELECT * FROM city");
 
         foreach (var cliente in clientes)
         {
-            Console.WriteLine($"ID: {cliente.Id}, Nome: {cliente.Nome}, Email: {cliente.Email}");
+            Console.WriteLine($"ID: {cliente}, Nome: {cliente}, Email: {cliente}");
         }
 
 
