@@ -6,7 +6,7 @@ using System.Data;
 
 namespace Cmr.Pecas.Acessorios.Infra
 {
-    public class ProdutoRepository : DatabaseConnection, IProdutoRepository
+    public class ProdutoRepository : DatabaseContext, IProdutoRepository
     {
         private readonly IDbConnection _db;
         public ProdutoRepository(IOptionsSnapshot<ConnectionString> conectionString) : base(conectionString)

@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddTransient<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddTransient<ProdutoService>();
 
+builder.Services.AddScoped<DatabaseContext>();
+
 // Adiciona a seção ConnectionStrings ao sistema de opções
 builder.Services.Configure<ConnectionString>(
 builder.Configuration.GetSection("ConnectionString"));
