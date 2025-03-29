@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cmr.Pecas.Acessorios.Domain.Entities;
+using System;
 
 public class Produto
 {
@@ -10,4 +11,7 @@ public class Produto
     public Guid id_marca { get; set; }
     public DateTime data_insercao { get; set; }
     public DateTime? data_desativacao { get; set; }
+
+    public Categoria categoria { get; set; }
+    public Marca marca { get; set; }
 }
