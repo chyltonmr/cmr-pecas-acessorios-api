@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace cmr_pecas_acessorios_api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("")]
 public class DashboardProdutosController : ControllerBase
 {
     private readonly ProdutoService _produtoService;
@@ -27,29 +27,14 @@ public class DashboardProdutosController : ControllerBase
         _produtoService = produtoService;
     }
 
-    [HttpGet(Name = "produtos")]
-    public async Task<IEnumerable<WeatherForecast>> Get()
+
+    [HttpGet]
+    [Route("produtos")]
+    public async Task<IEnumerable<Produto>> Get()
     {
 
         var dd = await _produtoService.GetAll();
 
-        string connectionString = "Server=localhost;Port=3306;Database=world;User Id=root;Password=080205;";
-        using IDbConnection db = new MySqlConnection(connectionString);
-
-        var clientes = db.Query<object>("SELECT * FROM city");
-
-        foreach (var cliente in clientes)
-        {
-            Console.WriteLine($"ID: {cliente}, Nome: {cliente}, Email: {cliente}");
-        }
-
-
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
+        return dd;
     }
 }

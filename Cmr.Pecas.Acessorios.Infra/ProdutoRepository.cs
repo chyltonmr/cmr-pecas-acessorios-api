@@ -14,11 +14,11 @@ namespace Cmr.Pecas.Acessorios.Infra
             _db = CreateConnection();
         }
 
-        public Task<List<Produto>> GetAll()
+        public async Task<IEnumerable<Produto>> GetAll()
         {
-            var clientes = _db.Query<object>("SELECT * FROM city");
+            var clientes = await _db.QueryAsync<Produto>("SELECT * FROM produto");
 
-            throw new NotImplementedException();
+            return clientes;
         }
 
         public Task<Produto> GetById(int produtoId)

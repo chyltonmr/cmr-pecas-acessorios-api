@@ -11,6 +11,6 @@ namespace Cmr.Pecas.Acessorios.Domain.Repositories
         public void Save(Produto produto);
         public void Update(Produto produto);
         public Task<Produto> GetById(int produtoId);
-        public Task<List<Produto>> GetAll();
+        public Task<IEnumerable<Produto>> GetAll();
     }
 }
