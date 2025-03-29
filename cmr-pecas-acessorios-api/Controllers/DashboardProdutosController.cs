@@ -10,7 +10,7 @@ namespace cmr_pecas_acessorios_api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class DashboardProdutosController : ControllerBase
 {
     private readonly ProdutoService _produtoService;
 
@@ -19,15 +19,15 @@ public class WeatherForecastController : ControllerBase
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ILogger<DashboardProdutosController> _logger;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger, ProdutoService produtoService)
+    public DashboardProdutosController(ILogger<DashboardProdutosController> logger, ProdutoService produtoService)
     {
         _logger = logger;
         _produtoService = produtoService;
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
+    [HttpGet(Name = "produtos")]
     public async Task<IEnumerable<WeatherForecast>> Get()
     {
 
