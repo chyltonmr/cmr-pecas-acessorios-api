@@ -80,7 +80,7 @@ INSERT INTO preco (id, preco, id_produto, id_tipo_preco, data_insercao, data_des
 ('f148315b-9299-4919-9996-8340b4f422d9', 78.69, 'ab120d1b-31c9-456b-893a-2fcb66f3f538', '51e36c08-aa00-402b-8f9d-3c19f9ab9538', '2025-01-11', NULL, 'Preço Varejo do produto Lâmpada halógena h3'),
 ('6c94f290-d181-41d9-93ca-f99e647847d1', 32.79, 'ab120d1b-31c9-456b-893a-2fcb66f3f538', 'a194760c-16f8-4e17-993f-a0f439cfabc4', '2024-12-01', NULL, 'Preço Atacado do produto Lâmpada halógena h3'),
 ('a2342078-543f-442c-9435-b6eb5971dc40', 53.86, '6a7326b5-4305-4568-a594-70ff451a05df', '51e36c08-aa00-402b-8f9d-3c19f9ab9538', '2025-02-23', NULL, 'Preço Varejo do produto Lâmpada halógena h4'),
-('ff20b258-6177-4363-a4c5-c9befbe4d5d2', 62.13, '6a7326b5-4305-4568-a594-70ff451a05df', 'a194760c-16f8-4e17-993f-a0f439cfabc4', '2025-02-28', NULL, 'Preço Atacado do produto Lâmpada halógena h4');4
+('ff20b258-6177-4363-a4c5-c9befbe4d5d2', 62.13, '6a7326b5-4305-4568-a594-70ff451a05df', 'a194760c-16f8-4e17-993f-a0f439cfabc4', '2025-02-28', NULL, 'Preço Atacado do produto Lâmpada halógena h4');
 
 --- CUSTO
 
