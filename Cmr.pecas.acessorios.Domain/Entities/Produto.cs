@@ -14,4 +14,12 @@ public class Produto
 
     public Categoria categoria { get; set; }
     public Marca marca { get; set; }
+    public List<Preco> precos { get; set; } = new();
+
+    //public MargemLucro margemLucro { get; set; }
+    public Custo custo { get; set; }
+    //public TipoPreco tipoPreco { get; set; }
+    //public PrecoPersonalizado precoPersonalizado { get; set; }
+    //public TipoPreco tipoPrecoPersonalizado { get; set; }
+    //public MargemLucroPersonalizado margemLucroPersonalizada { get; set; }
 }

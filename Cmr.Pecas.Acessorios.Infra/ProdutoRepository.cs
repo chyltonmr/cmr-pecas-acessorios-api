@@ -15,31 +15,55 @@ namespace Cmr.Pecas.Acessorios.Infra
             _db = CreateConnection();
         }
 
+
         public async Task<IEnumerable<Produto>> GetAll()
         {
             var sql = @"
-            SELECT 
-                p.*,
-                c.*,
-                m.*
-            FROM produto p
-            JOIN categoria c ON p.id_categoria = c.id
-            JOIN marca m ON p.id_marca = m.id
-        ";
+    SELECT 
+        p.*, 
+        c.*, 
+        m.*, 
+        pr.*, 
+        tp.*, 
+        ml.*, 
+        cu.*
+    FROM produto p
+    JOIN categoria c ON p.id_categoria = c.id
+    JOIN marca m ON p.id_marca = m.id
+    JOIN preco pr ON pr.id_produto = p.id
+    JOIN tipo_preco tp ON pr.id_tipo_preco = tp.id
+    LEFT JOIN margem_lucro ml ON ml.id_preco = pr.id
+    LEFT JOIN custo cu ON cu.id_produto = p.id
+";
 
-            var produtos = await _db.QueryAsync<Produto, Categoria, Marca, Produto>(
+            var produtoDictionary = new Dictionary<Guid, Produto>();
+
+            var result = await _db.QueryAsync<Produto, Categoria, Marca, Preco, TipoPreco, MargemLucro, Custo, Produto>(
                 sql,
-                (produto, categoria, marca) =>
+                (produto, categoria, marca, preco, tipoPreco, margemLucro, custo) =>
                 {
-                    produto.categoria = categoria;
-                    produto.marca = marca;
-                    return produto;
+                    if (!produtoDictionary.TryGetValue(produto.id, out var produtoEntry))
+                    {
+                        produtoEntry = produto;
+                        produtoEntry.categoria = categoria;
+                        produtoEntry.marca = marca;
+                        produtoEntry.precos = new List<Preco>();
+                        produtoEntry.custo = custo;
+
+                        produtoDictionary.Add(produtoEntry.id, produtoEntry);
+                    }
+
+                    preco.tipoPreco = tipoPreco;
+                    preco.margemLucro = margemLucro;
+
+                    produtoEntry.precos.Add(preco);
+
+                    return produtoEntry;
                 },
-                splitOn: "id,id"
+                splitOn: "id,id,id,id,id,id,id"
             );
 
-            return produtos;
-
+            return produtoDictionary.Values;
         }
 
         public Task<Produto> GetById(int produtoId)

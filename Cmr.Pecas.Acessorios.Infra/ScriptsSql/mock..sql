@@ -59,7 +59,7 @@ INSERT INTO preco (id, preco, id_produto, id_tipo_preco, data_insercao, data_des
 ('3abcebde-c03b-4f5a-a753-f1fab02f745a', 146.15, '923abc04-bcfe-4d1a-920b-a4a83d431d4a', 'a194760c-16f8-4e17-993f-a0f439cfabc4', '2025-01-20', NULL, 'Preço Atacado do produto Led Diamond H1'),
 ('955a77e2-7b53-4d43-bc3a-83aa21a848a2', 82.23, '55406d46-6079-4211-a1f0-f316abc3eb4d', '51e36c08-aa00-402b-8f9d-3c19f9ab9538', '2025-01-21', NULL, 'Preço Varejo do produto Led Diamond H3'),
 ('7cd709aa-4f26-4b12-98c0-b72fd61230c6', 89.5, '55406d46-6079-4211-a1f0-f316abc3eb4d', 'a194760c-16f8-4e17-993f-a0f439cfabc4', '2025-01-10', NULL, 'Preço Atacado do produto Led Diamond H3'),
-('356801a0-663c-42c5-a18d-f1468849c407', 69.97, '008dd56b-c65c-4800-b4a9-7e59e64945e2', '51e36c08-aa00-402b-8f9d-3c19f9ab9538', '2024-12-20', NULL, 'Preço Varejo do produto Led Diamond H4'),
+('356801a0-663c-42c5-a18d-f1468849c407', 69.97, '008dd56b-c65c-4800-b4a9-7e59e64945e2', '51e36c08-aa00-402b-8f9d-3c19f9ab9538', '2024-12-20', '2024-12-21', 'Preço Varejo do produto Led Diamond H4'),
 ('b5cef998-4a8a-40fd-a9c8-ea9fe6a17c8a', 75.8, '008dd56b-c65c-4800-b4a9-7e59e64945e2', 'a194760c-16f8-4e17-993f-a0f439cfabc4', '2025-02-18', NULL, 'Preço Atacado do produto Led Diamond H4'),
 ('a8e7aa6f-13a0-487f-b505-4b8611072305', 99.93, '9b1f04e6-bb01-4046-9fa7-0586e338ecdc', '51e36c08-aa00-402b-8f9d-3c19f9ab9538', '2025-02-17', NULL, 'Preço Varejo do produto Led Diamond H7'),
 ('0c783013-4437-4336-8b96-8e6d80eb124e', 139.58, '9b1f04e6-bb01-4046-9fa7-0586e338ecdc', 'a194760c-16f8-4e17-993f-a0f439cfabc4', '2024-12-18', NULL, 'Preço Atacado do produto Led Diamond H7'),
@@ -128,3 +128,13 @@ INSERT INTO margem_lucro (id, porcentagem, id_preco, data_insercao, data_desativ
 ('b62b59d4-8eb1-4d46-9546-6a57079794a2', 42.38, '6c94f290-d181-41d9-93ca-f99e647847d1', '2024-12-01', NULL),
 ('9fd8da9c-ccf9-41db-b6f5-59b3d249386e', 27.14, 'a2342078-543f-442c-9435-b6eb5971dc40', '2025-02-23', NULL),
 ('adae4244-78dd-4a53-96c5-989e3efa0d3c', 34.58, 'ff20b258-6177-4363-a4c5-c9befbe4d5d2', '2025-02-28', NULL);
+
+-- CLIENTES
+
+INSERT INTO cliente (id, nome, data_insercao, data_desativacao, observacao)
+VALUES 
+  ('11111111-1111-1111-1111-111111111111', 'João da Silva', CURRENT_DATE, NULL, 'Cliente antigo e fiel'),
+  ('22222222-2222-2222-2222-222222222222', 'Maria Oliveira', CURRENT_DATE, NULL, 'Comprou recentemente'),
+  ('33333333-3333-3333-3333-333333333333', 'Carlos Souza', CURRENT_DATE, NULL, 'Cliente VIP'),
+  ('44444444-4444-4444-4444-444444444444', 'Fernanda Lima', CURRENT_DATE, NULL, 'Prefere contato por WhatsApp'),
+  ('55555555-5555-5555-5555-555555555555', 'Ana Beatriz Costa', CURRENT_DATE, NULL, 'Solicita orçamento mensal');

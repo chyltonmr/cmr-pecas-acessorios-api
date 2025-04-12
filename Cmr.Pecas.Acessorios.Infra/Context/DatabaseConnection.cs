@@ -12,9 +12,10 @@ public abstract class DatabaseConnection
         _connectionString = conectionString.Value.Conection;
     }
 
-    protected IDbConnection CreateConnection()
+    protected System.Data.IDbConnection CreateConnection()
     {
         var connection = new MySqlConnection(_connectionString);
+        connection.Open(); // <=== ESSENCIAL
         return connection;
     }
 }

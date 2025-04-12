@@ -30,11 +30,11 @@ public class DashboardProdutosController : ControllerBase
 
     [HttpGet]
     [Route("produtos")]
-    public async Task<IEnumerable<Produto>> Get()
+    public async Task<Produto>Get()
     {
 
         var dd = await _produtoService.GetAll();
 
-        return dd;
+        return dd.FirstOrDefault();
     }
 }
