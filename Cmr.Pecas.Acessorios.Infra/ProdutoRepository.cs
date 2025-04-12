@@ -16,25 +16,30 @@ namespace Cmr.Pecas.Acessorios.Infra
         }
 
 
-        public async Task<IEnumerable<Produto>> GetAll()
+        public async Task<PagedResult<Produto>> GetAll(int pageNumber, int pageSize)
         {
+            var offset = (pageNumber - 1) * pageSize;
+
+            // Consulta de dados com paginação
             var sql = @"
-    SELECT 
-        p.*, 
-        c.*, 
-        m.*, 
-        pr.*, 
-        tp.*, 
-        ml.*, 
-        cu.*
-    FROM produto p
-    JOIN categoria c ON p.id_categoria = c.id
-    JOIN marca m ON p.id_marca = m.id
-    JOIN preco pr ON pr.id_produto = p.id
-    JOIN tipo_preco tp ON pr.id_tipo_preco = tp.id
-    LEFT JOIN margem_lucro ml ON ml.id_preco = pr.id
-    LEFT JOIN custo cu ON cu.id_produto = p.id
-";
+        SELECT 
+            p.*, 
+            c.*, 
+            m.*, 
+            pr.*, 
+            tp.*, 
+            ml.*, 
+            cu.*
+        FROM produto p
+        JOIN categoria c ON p.id_categoria = c.id
+        JOIN marca m ON p.id_marca = m.id
+        JOIN preco pr ON pr.id_produto = p.id
+        JOIN tipo_preco tp ON pr.id_tipo_preco = tp.id
+        LEFT JOIN margem_lucro ml ON ml.id_preco = pr.id
+        LEFT JOIN custo cu ON cu.id_produto = p.id
+        ORDER BY p.nome
+        LIMIT @PageSize OFFSET @Offset;
+    ";
 
             var produtoDictionary = new Dictionary<Guid, Produto>();
 
@@ -55,16 +60,29 @@ namespace Cmr.Pecas.Acessorios.Infra
 
                     preco.tipoPreco = tipoPreco;
                     preco.margemLucro = margemLucro;
-
                     produtoEntry.precos.Add(preco);
 
                     return produtoEntry;
                 },
+                new { Offset = offset, PageSize = pageSize },
                 splitOn: "id,id,id,id,id,id,id"
             );
 
-            return produtoDictionary.Values;
+            // Consulta de contagem total
+            var countSql = "SELECT COUNT(*) FROM produto";
+            var totalItems = await _db.ExecuteScalarAsync<int>(countSql);
+
+            return new PagedResult<Produto>
+            {
+                Items = produtoDictionary.Values,
+                TotalItems = totalItems,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
         }
+
+
+
 
         public Task<Produto> GetById(int produtoId)
         {

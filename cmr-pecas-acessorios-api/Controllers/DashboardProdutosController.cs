@@ -5,6 +5,7 @@ using MySqlConnector;
 using Cmr.Pecas.Acessorios.Service;
 using Cmr.Pecas.Acessorios.Service.Services;
 using System.Threading.Tasks;
+using Cmr.Pecas.Acessorios.Domain.Repositories;
 
 namespace cmr_pecas_acessorios_api.Controllers;
 
@@ -30,11 +31,11 @@ public class DashboardProdutosController : ControllerBase
 
     [HttpGet]
     [Route("produtos")]
-    public async Task<Produto>Get()
+    public async Task<PagedResult<Produto>> Get([FromQuery] int pageNumber,[FromQuery] int pageSize)
     {
 
-        var dd = await _produtoService.GetAll();
+        PagedResult<Produto> resp = await _produtoService.GetAll();
 
-        return dd.FirstOrDefault();
+        return resp;
     }
 }

@@ -15,9 +15,9 @@ namespace Cmr.Pecas.Acessorios.Service.Services
         {
             _estoqueRepository = produtoRepository;
         }
-        public async Task<IEnumerable<Produto>> GetAll()
+        public async Task<PagedResult<Produto>> GetAll(int pageNumber, int pageSize)
         {
-            IEnumerable<Produto> response = await _estoqueRepository.GetAll();
+            PagedResult<Produto> response = await _estoqueRepository.GetAll(pageNumber, pageSize);
             return response;
         }
     }
