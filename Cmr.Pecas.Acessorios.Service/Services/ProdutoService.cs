@@ -1,4 +1,5 @@
 ﻿using Cmr.Pecas.Acessorios.Domain.Repositories;
+using Cmr.Pecas.Acessorios.Service.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,19 @@ namespace Cmr.Pecas.Acessorios.Service.Services
         {
             _estoqueRepository = produtoRepository;
         }
-        public async Task<PagedResult<Produto>> GetAll(int pageNumber, int pageSize)
+        public async Task<PagedResult<ObterTodosProdutosDto>> GetAll(int pageNumber, int pageSize)
         {
             PagedResult<Produto> response = await _estoqueRepository.GetAll(pageNumber, pageSize);
-            return response;
+            var produtos = response.Produtos.ToList();
+            var produtosDto = await new ObterTodosProdutosDto().MapObterTodosProduto(produtos);
+            var pagResult = new PagedResult<ObterTodosProdutosDto>
+            {
+                Produtos = produtosDto,
+                TotalItems = response.TotalItems,
+                PageNumber = response.PageNumber,
+                PageSize = response.PageSize
+            };
+            return pagResult;
         }
     }
 }

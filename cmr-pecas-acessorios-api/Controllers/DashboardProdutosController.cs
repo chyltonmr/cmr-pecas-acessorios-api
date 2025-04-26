@@ -6,6 +6,7 @@ using Cmr.Pecas.Acessorios.Service;
 using Cmr.Pecas.Acessorios.Service.Services;
 using System.Threading.Tasks;
 using Cmr.Pecas.Acessorios.Domain.Repositories;
+using Cmr.Pecas.Acessorios.Service.DTO;
 
 namespace cmr_pecas_acessorios_api.Controllers;
 
@@ -31,10 +32,10 @@ public class DashboardProdutosController : ControllerBase
 
     [HttpGet]
     [Route("produtos")]
-    public async Task<PagedResult<Produto>> Get([FromQuery] int pageNumber,[FromQuery] int pageSize)
+    public async Task<PagedResult<ObterTodosProdutosDto>> Get([FromQuery] int pageNumber, [FromQuery] int pageSize)
     {
 
-        PagedResult<Produto> resp = await _produtoService.GetAll(pageNumber, pageSize);
+        PagedResult<ObterTodosProdutosDto> resp = await _produtoService.GetAll(pageNumber, pageSize);
 
         return resp;
     }

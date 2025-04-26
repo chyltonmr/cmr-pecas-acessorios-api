@@ -74,7 +74,7 @@ namespace Cmr.Pecas.Acessorios.Infra
 
             return new PagedResult<Produto>
             {
-                Items = produtoDictionary.Values,
+                Produtos = produtoDictionary.Values.ToList(),
                 TotalItems = totalItems,
                 PageNumber = pageNumber,
                 PageSize = pageSize

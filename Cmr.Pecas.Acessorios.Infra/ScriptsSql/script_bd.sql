@@ -15,6 +15,7 @@ CREATE TABLE categoria (
 CREATE TABLE produto (
   id CHAR(36) PRIMARY KEY,
   nome VARCHAR(100) NOT NULL,
+  imagem_thumbnail VARCHAR(300),
   descricao TEXT,
   estoque INT DEFAULT 0,
   id_categoria CHAR(36) NOT NULL,
@@ -35,7 +36,8 @@ CREATE TABLE tipo_preco (
 
 CREATE TABLE preco (
   id CHAR(36) PRIMARY KEY,
-  preco DECIMAL(10,2) NOT NULL,
+  preco_pj DECIMAL(10,2) NOT NULL,
+  preco_pf DECIMAL(10,2) NOT NULL,
   id_produto CHAR(36) NOT NULL,
   id_tipo_preco CHAR(36) NOT NULL,
   data_insercao DATE NOT NULL,
@@ -58,7 +60,10 @@ CREATE TABLE custo (
 
 CREATE TABLE margem_lucro (
   id CHAR(36) PRIMARY KEY,
-  porcentagem DECIMAL(5,2) NOT NULL,
+  porcentagem_pj DECIMAL(5,2) NOT NULL,
+  porcentagem_pf DECIMAL(5,2) NOT NULL,
+  valor_liquido_pj DECIMAL(5,2) NOT NULL,
+  valor_liquido_pf DECIMAL(5,2) NOT NULL,
   id_preco CHAR(36) NOT NULL UNIQUE,
   data_insercao DATE NOT NULL,
   data_desativacao DATE,
@@ -72,7 +77,7 @@ CREATE TABLE cliente (
   data_insercao DATE NOT NULL,
   data_desativacao DATE,
   observacao TEXT
-)
+);
 
 -- Tabela para preços personalizado por cliente
 CREATE TABLE preco_personalizado (
