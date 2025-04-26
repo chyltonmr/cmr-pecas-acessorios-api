@@ -34,7 +34,7 @@ public class DashboardProdutosController : ControllerBase
     public async Task<PagedResult<Produto>> Get([FromQuery] int pageNumber,[FromQuery] int pageSize)
     {
 
-        PagedResult<Produto> resp = await _produtoService.GetAll();
+        PagedResult<Produto> resp = await _produtoService.GetAll(pageNumber, pageSize);
 
         return resp;
     }
