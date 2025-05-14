@@ -41,7 +41,7 @@ public class DashboardProdutosController : ControllerBase
     }
 
     [HttpPatch]
-    [Route("produtos")]
+    [Route("produtos/atualizar")]
     public async Task Update([FromBody] ObterTodosProdutosDto produto)
     {
         //TODO: IMPLEMENTAR
