@@ -27,7 +27,7 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200") // Coloque a porta do seu Angular aqui
+            policy.WithOrigins("http://localhost:4200") //TODO: Liberando acesso front-end por outro dominio
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
