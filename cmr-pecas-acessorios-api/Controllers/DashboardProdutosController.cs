@@ -39,4 +39,12 @@ public class DashboardProdutosController : ControllerBase
 
         return resp;
     }
+
+    [HttpPatch]
+    [Route("produtos")]
+    public async Task Update([FromBody] ObterTodosProdutosDto produto)
+    {
+        //TODO: IMPLEMENTAR
+        await _produtoService.Update(new ObterTodosProdutosDto());
+    }
 }
