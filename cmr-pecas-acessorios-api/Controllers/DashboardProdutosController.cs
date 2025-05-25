@@ -43,8 +43,10 @@ public class DashboardProdutosController : ControllerBase
     }
 
     [HttpPatch]
-    [Route("produto/atualizar")]
-    public async Task Update([FromBody] ObterTodosProdutosDto produto)
+    [Route("produto/atualizar/{id:guid}")]
+    public async Task Update(
+        [FromRoute] Guid id,
+        [FromBody] ObterTodosProdutosDto produto)
     {
         //TODO: IMPLEMENTAR
         await _produtoService.Update(new ObterTodosProdutosDto());

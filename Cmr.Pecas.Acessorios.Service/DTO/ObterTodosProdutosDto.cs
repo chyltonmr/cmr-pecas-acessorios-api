@@ -49,7 +49,7 @@ namespace Cmr.Pecas.Acessorios.Service.DTO
                         data_desativacao = produto.data_desativacao,
                         categoria = produto.categoria,
                         marca = produto.marca,
-                        precos = produto.precos.First(x => x.data_desativacao == null),
+                        precos = produto.precos.First(x => x.tipoPreco.nome.Equals("PRINCIPAL")),
                         custo = produto.custo
                     });
                 }

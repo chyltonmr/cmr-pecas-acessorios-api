@@ -28,7 +28,7 @@ CREATE TABLE produto (
 
 CREATE TABLE tipo_preco (
   id CHAR(36) PRIMARY KEY,
-  nome VARCHAR(50) NOT NULL,
+  nome VARCHAR(50) NOT NULL UNIQUE,
   descricao TEXT,
   data_insercao DATE NOT NULL,
   data_desativacao DATE
