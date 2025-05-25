@@ -10,8 +10,4 @@
     <ProjectReference Include="..\Cmr.pecas.acessorios.Domain\Cmr.Pecas.Acessorios.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTO\" />
-  </ItemGroup>
-
 </Project>

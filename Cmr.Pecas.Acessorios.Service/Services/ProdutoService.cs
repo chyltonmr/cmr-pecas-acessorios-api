@@ -19,11 +19,11 @@ namespace Cmr.Pecas.Acessorios.Service.Services
         public async Task<PagedResult<ObterTodosProdutosDto>> GetAll(int pageNumber, int pageSize)
         {
             PagedResult<Produto> response = await _estoqueRepository.GetAll(pageNumber, pageSize);
-            var produtos = response.Produtos.ToList();
+            var produtos = response.ListObjetos.ToList();
             var produtosDto = await new ObterTodosProdutosDto().MapObterTodosProduto(produtos);
             var pagResult = new PagedResult<ObterTodosProdutosDto>
             {
-                Produtos = produtosDto,
+                ListObjetos = produtosDto,
                 TotalItems = response.TotalItems,
                 PageNumber = response.PageNumber,
                 PageSize = response.PageSize

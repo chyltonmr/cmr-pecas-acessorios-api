@@ -8,7 +8,7 @@ namespace Cmr.Pecas.Acessorios.Domain.Repositories
 {
     public class PagedResult<T>
     {
-        public List<T> Produtos { get; set; }
+        public List<T> ListObjetos { get; set; }
         public int TotalItems { get; set; }
         public int PageNumber { get; set; }
         public int PageSize { get; set; }

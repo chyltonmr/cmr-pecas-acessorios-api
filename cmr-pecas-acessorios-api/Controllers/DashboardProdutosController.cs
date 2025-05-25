@@ -15,6 +15,7 @@ namespace cmr_pecas_acessorios_api.Controllers;
 public class DashboardProdutosController : ControllerBase
 {
     private readonly ProdutoService _produtoService;
+    private readonly CategoriaService _categoriaService;
 
     private static readonly string[] Summaries = new[]
     {
@@ -23,10 +24,11 @@ public class DashboardProdutosController : ControllerBase
 
     private readonly ILogger<DashboardProdutosController> _logger;
 
-    public DashboardProdutosController(ILogger<DashboardProdutosController> logger, ProdutoService produtoService)
+    public DashboardProdutosController(ILogger<DashboardProdutosController> logger, ProdutoService produtoService, CategoriaService categoriaService)
     {
         _logger = logger;
         _produtoService = produtoService;
+        _categoriaService = categoriaService;
     }
 
 
@@ -46,5 +48,15 @@ public class DashboardProdutosController : ControllerBase
     {
         //TODO: IMPLEMENTAR
         await _produtoService.Update(new ObterTodosProdutosDto());
+    }
+
+    [HttpGet]
+    [Route("categorias")]
+    public async Task<PagedResult<ObterCategoriasDto>> Get()
+    {
+
+        PagedResult<ObterCategoriasDto> resp = await _categoriaService.GetAll(1, 14);
+
+        return resp;
     }
 }
