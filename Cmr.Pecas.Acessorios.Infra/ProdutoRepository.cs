@@ -4,6 +4,7 @@ using Cmr.Pecas.Acessorios.Infra.Context;
 using Dapper;
 using Microsoft.Extensions.Options;
 using System.Data;
+using System.Transactions;
 
 namespace Cmr.Pecas.Acessorios.Infra
 {
@@ -96,7 +97,118 @@ namespace Cmr.Pecas.Acessorios.Infra
 
         public void Update(Produto produto)
         {
-            throw new NotImplementedException();
+
+            using var transaction = _db.BeginTransaction();
+
+            try
+            {
+                // 1. Produto
+                _db.Execute(@"
+            UPDATE produto SET
+                nome = @nome,
+                imagem_thumbnail = @imagem_thumbnail,
+                descricao = @descricao,
+                estoque = @estoque,
+                id_categoria = @id_categoria,
+                id_marca = @id_marca,
+                data_insercao = @data_insercao,
+                data_desativacao = @data_desativacao
+            WHERE id = @id
+        ", new
+                {
+                    id = produto.id,
+                    nome = produto.nome,
+                    imagem_thumbnail = produto.imagem_thumbnail,
+                    descricao = produto.descricao,
+                    estoque = produto.estoque,
+                    id_categoria = produto.id_categoria,
+                    id_marca = produto.id_marca,
+                    data_insercao = produto.data_insercao,
+                    data_desativacao = produto.data_desativacao,
+                },
+                  transaction);
+
+                // 2. Categoria
+                _db.Execute(@"
+                    UPDATE categoria SET
+                        nome = @nome,
+                        id = @id
+                        WHERE id = @id
+        ", new
+                {
+                    id = produto.id_categoria,
+                    nome = produto.categoria.nome,
+                }, transaction);
+
+                // 3. Marca
+                _db.Execute(@"
+                    UPDATE marca SET
+                        nome = @nome,
+                        id = @id
+                        WHERE Id = @id
+        ", new
+                {
+                    id = produto.id_categoria,
+                    nome = produto.categoria.nome,
+                }, transaction);
+
+                // 4. Preços (lista)
+                foreach (var preco in produto.precos)
+                {
+                    // 4.1. Preço
+                    _db.Execute(@"
+                UPDATE preco SET
+                    preco_pj = @preco_pj,
+                    preco_pf = @preco_pf,
+                    observacao = @observacao
+                WHERE id = @id
+            ", new
+                    {
+                        id = preco.id,
+                        preco_pj = preco.preco_pj,
+                        preco_pf = preco.preco_pf,
+                        observacao = preco.observacao,
+                    }, transaction);
+
+                    // 4.2. Tipo de Preço
+                    _db.Execute(@"
+                UPDATE tipo_preco SET
+                    id = @id,
+                    nome = @nome,
+                    descricao = @descricao
+                    WHERE id = @id
+            ", new
+                    {
+                        id = preco.tipoPreco.id,
+                        nome = preco.tipoPreco.nome,
+                        descricao = preco.tipoPreco.descricao,
+                    }, transaction);
+
+
+                }
+
+                // 5. Custo
+                _db.Execute(@"
+                UPDATE custo SET
+                    nome = @nome,
+                    descricao = @descricao,
+                    custo = @custo
+                WHERE id = @id
+            ", new
+                {
+                    id = produto.custo.id,
+                    nome = produto.custo.nome,
+                    descricao = produto.custo.descricao,
+                    custo = produto.custo.custo,
+                }, transaction);
+
+                transaction.Commit();
+            }
+            catch
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
     }
 }

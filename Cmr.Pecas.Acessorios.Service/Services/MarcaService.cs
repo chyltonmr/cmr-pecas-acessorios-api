@@ -20,6 +20,12 @@ namespace Cmr.Pecas.Acessorios.Service.Services
 
         public async Task<PagedResult<ObterMarcasDto>> GetAll(int pageNumber, int pageSize)
         {
+            if (pageNumber == default)
+                pageNumber = 1;
+
+            if (pageSize == default)
+                pageSize = 100;
+
             PagedResult<Marca> response = await _marcaRepository.GetAll(pageNumber, pageSize);
             var marcas = response.ListObjetos.ToList();
             var marcasDto = await new ObterMarcasDto().MapObterMarcasDto(marcas);

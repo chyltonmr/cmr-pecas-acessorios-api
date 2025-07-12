@@ -57,5 +57,51 @@ namespace Cmr.Pecas.Acessorios.Service.DTO
                 return response;
             });
         }
+
+        public async Task<List<Produto>> MapParaProduto(List<ObterTodosProdutosDto> produtos)
+        {
+            // Using Task.Run to address CS1998
+            return await Task.Run(() =>
+            {
+                var response = new List<Produto>();
+
+                foreach (var produto in produtos)
+                {
+                    response.Add(new Produto
+                    {
+                        id = produto.id,
+                        nome = produto.nome,
+                        imagem_thumbnail = produto.imagem_thumbnail,
+                        descricao = produto.descricao,
+                        estoque = produto.estoque,
+                        id_categoria = produto.id_categoria,
+                        id_marca = produto.id_marca,
+                        data_insercao = produto.data_insercao,
+                        data_desativacao = produto.data_desativacao,
+                        categoria = produto.categoria,
+                        marca = produto.marca,
+                        precos = new List<Preco>
+                        { new Preco()
+                        {
+                            id = produto.precos.id,
+                            id_produto = produto.id,
+                            id_tipo_preco = produto.precos.id_tipo_preco,
+                            preco_pj = produto.precos.preco_pj,
+                            preco_pf = produto.precos.preco_pf,
+                            data_insercao = produto.precos.data_insercao,
+                            data_desativacao = produto.precos.data_desativacao,
+                            observacao = produto.precos.observacao,
+                            tipoPreco = produto.precos.tipoPreco,
+                            margemLucro = produto.precos.margemLucro,
+
+                        }
+                        },
+                        custo = produto.custo
+                    });
+                }
+
+                return response;
+            });
+        }
     }
 }

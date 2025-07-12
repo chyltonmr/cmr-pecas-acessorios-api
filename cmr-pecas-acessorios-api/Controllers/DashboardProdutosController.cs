@@ -48,10 +48,22 @@ public class DashboardProdutosController : ControllerBase
         [FromRoute] Guid id,
         [FromBody] ObterTodosProdutosDto produto)
     {
-        //TODO: IMPLEMENTAR
-        await _produtoService.Update(new ObterTodosProdutosDto());
+        if (produto == null)
+        {
+            return BadRequest("O objeto produto não pode ser nulo.");
+        }
 
-        return StatusCode(200,produto);
+        var resp = await produto.MapParaProduto(new List<ObterTodosProdutosDto>() { produto });
+        var produtoAtualizado = resp.FirstOrDefault();
+
+        if (produtoAtualizado == null)
+        {
+            return NotFound("Nenhum produto encontrado para atualizar.");
+        }
+
+        await _produtoService.Update(produtoAtualizado);
+
+        return StatusCode(200, produto);
     }
 
     [HttpGet]
