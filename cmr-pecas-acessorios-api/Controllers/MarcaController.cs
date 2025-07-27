@@ -6,7 +6,7 @@ using Cmr.Pecas.Acessorios.Service;
 using Cmr.Pecas.Acessorios.Service.Services;
 using System.Threading.Tasks;
 using Cmr.Pecas.Acessorios.Domain.Repositories;
-using Cmr.Pecas.Acessorios.Service.DTO;
+using Cmr.Pecas.Acessorios.Domain.DTO;
 
 namespace cmr_pecas_acessorios_api.Controllers;
 

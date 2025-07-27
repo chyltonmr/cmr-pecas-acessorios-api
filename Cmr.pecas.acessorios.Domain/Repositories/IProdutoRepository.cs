@@ -1,5 +1,5 @@
 ﻿
-using Cmr.Pecas.Acessorios.Domain.Entities;
+using Cmr.Pecas.Acessorios.Domain.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Cmr.Pecas.Acessorios.Domain.Repositories
 {
-    public interface IMarcaRepository
+    public interface IProdutoRepository
     {
-        public void Save(Marca marca);
-        public void Update(Marca marca);
-        public Task<Marca> GetById(int marcaId);
-        public Task<PagedResult<Marca>> GetAll(int pageNumber, int pageSize);
+        public Task Save(Produto produto);
+        public Task Update(ObterTodosProdutosDto produto);
+        public Task<Produto> GetById(int produtoId);
+        public Task<PagedResult<Produto>> GetAll(int pageNumber, int pageSize);
     }
 }

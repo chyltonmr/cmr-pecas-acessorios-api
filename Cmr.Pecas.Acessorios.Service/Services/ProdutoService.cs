@@ -1,5 +1,5 @@
-﻿using Cmr.Pecas.Acessorios.Domain.Repositories;
-using Cmr.Pecas.Acessorios.Service.DTO;
+﻿using Cmr.Pecas.Acessorios.Domain.DTO;
+using Cmr.Pecas.Acessorios.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,9 +31,9 @@ namespace Cmr.Pecas.Acessorios.Service.Services
             return pagResult;
         }
 
-        public async Task Update(Produto produto)
+        public async Task Update(ObterTodosProdutosDto produto)
         {
-           _estoqueRepository.Update(produto);
+          await _estoqueRepository.Update(produto);
         }
     }
 }

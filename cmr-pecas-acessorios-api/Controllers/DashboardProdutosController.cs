@@ -6,7 +6,7 @@ using Cmr.Pecas.Acessorios.Service;
 using Cmr.Pecas.Acessorios.Service.Services;
 using System.Threading.Tasks;
 using Cmr.Pecas.Acessorios.Domain.Repositories;
-using Cmr.Pecas.Acessorios.Service.DTO;
+using Cmr.Pecas.Acessorios.Domain.DTO;
 
 namespace cmr_pecas_acessorios_api.Controllers;
 
@@ -48,20 +48,8 @@ public class DashboardProdutosController : ControllerBase
         [FromRoute] Guid id,
         [FromBody] ObterTodosProdutosDto produto)
     {
-        if (produto == null)
-        {
-            return BadRequest("O objeto produto não pode ser nulo.");
-        }
-
-        var resp = await produto.MapParaProduto(new List<ObterTodosProdutosDto>() { produto });
-        var produtoAtualizado = resp.FirstOrDefault();
-
-        if (produtoAtualizado == null)
-        {
-            return NotFound("Nenhum produto encontrado para atualizar.");
-        }
-
-        await _produtoService.Update(produtoAtualizado);
+       
+        await _produtoService.Update(produto);
 
         return StatusCode(200, produto);
     }

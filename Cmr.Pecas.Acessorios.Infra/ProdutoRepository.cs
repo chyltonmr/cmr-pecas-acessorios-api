@@ -1,9 +1,11 @@
-﻿using Cmr.Pecas.Acessorios.Domain.Entities;
+﻿using Cmr.Pecas.Acessorios.Domain.DTO;
+using Cmr.Pecas.Acessorios.Domain.Entities;
 using Cmr.Pecas.Acessorios.Domain.Repositories;
 using Cmr.Pecas.Acessorios.Infra.Context;
 using Dapper;
 using Microsoft.Extensions.Options;
 using System.Data;
+using System.Threading.Tasks;
 using System.Transactions;
 
 namespace Cmr.Pecas.Acessorios.Infra
@@ -90,13 +92,15 @@ namespace Cmr.Pecas.Acessorios.Infra
             throw new NotImplementedException();
         }
 
-        public void Save(Produto produto)
+        public Task Save(Produto produto)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Produto produto)
+        public async Task Update(ObterTodosProdutosDto obterTodosProdutosDto)
         {
+            var respMap = await obterTodosProdutosDto.MapParaProduto(new List<ObterTodosProdutosDto>() { obterTodosProdutosDto });
+            var produto = respMap.FirstOrDefault();
 
             using var transaction = _db.BeginTransaction();
 

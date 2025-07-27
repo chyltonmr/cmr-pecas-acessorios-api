@@ -1,6 +1,6 @@
-﻿using Cmr.Pecas.Acessorios.Domain.Entities;
+﻿using Cmr.Pecas.Acessorios.Domain.DTO;
+using Cmr.Pecas.Acessorios.Domain.Entities;
 using Cmr.Pecas.Acessorios.Domain.Repositories;
-using Cmr.Pecas.Acessorios.Service.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
