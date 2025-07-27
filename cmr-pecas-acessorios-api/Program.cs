@@ -34,7 +34,8 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200") //TODO: Liberando acesso front-end por outro dominio
+            policy.WithOrigins("http://localhost:4200", 
+                               "https://localhost:7282") //TODO: Liberando acesso front-end por outro dominio
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
