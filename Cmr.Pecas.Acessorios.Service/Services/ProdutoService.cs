@@ -31,9 +31,12 @@ namespace Cmr.Pecas.Acessorios.Service.Services
             return pagResult;
         }
 
-        public async Task Update(ObterTodosProdutosDto produto)
+        public async Task Update(ObterTodosProdutosDto obterTodosProdutosDto)
         {
-          await _estoqueRepository.Update(produto);
+            var respMap = await obterTodosProdutosDto.MapParaProduto(new List<ObterTodosProdutosDto>() { obterTodosProdutosDto });
+            var produto = respMap.FirstOrDefault();
+
+            await _estoqueRepository.Update(produto);
         }
     }
 }
