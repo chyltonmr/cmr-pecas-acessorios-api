@@ -99,9 +99,6 @@ namespace Cmr.Pecas.Acessorios.Infra
 
         public async Task Update(Produto produto)
         {
-            //var respMap = await obterTodosProdutosDto.MapParaProduto(new List<ObterTodosProdutosDto>() { obterTodosProdutosDto });
-            //var produto = respMap.FirstOrDefault();
-
             using var transaction = _db.BeginTransaction();
 
             try
