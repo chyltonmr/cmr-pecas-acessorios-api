@@ -28,12 +28,12 @@ namespace Cmr.Pecas.Acessorios.Infra
             throw new NotImplementedException();
         }
 
-        public Task Save(List<MargemLucro> margemLucro)
+        public Task Save(MargemLucro margemLucro)
         {
             throw new NotImplementedException();
         }
 
-        public async Task Update(List<MargemLucro> margemLucro, IDbTransaction dbTransaction)
+        public async Task Update(MargemLucro margemLucro, IDbTransaction dbTransaction)
         {
             IDbTransaction _dbTransaction = dbTransaction ?? _db.BeginTransaction();
 
@@ -43,17 +43,14 @@ namespace Cmr.Pecas.Acessorios.Infra
                 porcentagem_pj = @porcentagem_pj,
                 porcentagem_pf = @porcentagem_pf,
                 valor_liquido_pj = @valor_liquido_pj,
-                valor_liquido_pf = @valor_liquido_pf,
+                valor_liquido_pf = @valor_liquido_pf
 
             WHERE id = @id;
         ";
 
             try
             {
-                foreach (var margem in margemLucro)
-                {
-                    await _db.ExecuteAsync(sql, margem, _dbTransaction);
-                }
+                await _db.ExecuteAsync(sql, margemLucro, _dbTransaction);
 
                 _dbTransaction.Commit();
             }

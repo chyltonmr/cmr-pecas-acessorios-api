@@ -43,15 +43,12 @@
     }
 
 
-    public async Task<List<MargemLucro>> CalcularValoresLiquidosEmLote(List<MargemLucro> margens, decimal clientePf, decimal clientePj, decimal custo)
+    public async Task<MargemLucro> CalcularValoresLiquidosEmLote(MargemLucro margens, decimal clientePf, decimal clientePj, decimal custo)
     {
-        foreach (var margem in margens)
-        {
-            margem.valor_liquido_pf = clientePf - custo;
-            margem.valor_liquido_pj = clientePj - custo;
+        margens.valor_liquido_pf = clientePf - custo;
+        margens.valor_liquido_pj = clientePj - custo;
 
-            await CalcularPorcentagensEmLote(margem, clientePf, clientePj);
-        }
+        await CalcularPorcentagensEmLote(margens, clientePf, clientePj);
 
         return await Task.FromResult(margens);
     }

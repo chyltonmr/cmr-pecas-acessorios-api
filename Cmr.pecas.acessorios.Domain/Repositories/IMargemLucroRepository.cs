@@ -11,8 +11,8 @@ namespace Cmr.Pecas.Acessorios.Domain.Repositories
 {
     public interface IMargemLucroRepository
     {
-        public Task Save(List<MargemLucro> margemLucro);
-        public Task Update(List<MargemLucro> margemLucro, IDbTransaction dbTransaction);
+        public Task Save(MargemLucro margemLucro);
+        public Task Update(MargemLucro margemLucro, IDbTransaction? dbTransaction = null);
         public Task<MargemLucro> GetById(int margemLucro);
         public Task<PagedResult<List<MargemLucro>>> GetAll(int pageNumber, int pageSize);
     }

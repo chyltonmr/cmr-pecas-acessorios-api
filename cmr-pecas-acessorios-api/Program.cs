@@ -1,6 +1,7 @@
 using Cmr.Pecas.Acessorios.Domain.Repositories;
 using Cmr.Pecas.Acessorios.Infra;
 using Cmr.Pecas.Acessorios.Infra.Context;
+using Cmr.Pecas.Acessorios.Service.BFF;
 using Cmr.Pecas.Acessorios.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,12 @@ builder.Services.AddTransient<CategoriaService>();
 
 builder.Services.AddTransient<IMarcaRepository, MarcaRepository>();
 builder.Services.AddTransient<MarcaService>();
+
+builder.Services.AddTransient<IMargemLucroRepository, MargemLucroRepository>();
+builder.Services.AddTransient<MargemLucroService>();
+
+
+builder.Services.AddTransient<UseCaseAtualizarInfoProdutos>();
 
 
 builder.Services.AddScoped<DatabaseContext>();

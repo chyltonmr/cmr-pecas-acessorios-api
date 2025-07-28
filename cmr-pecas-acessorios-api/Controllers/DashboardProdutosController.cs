@@ -1,12 +1,13 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Data;
-using Dapper;
-using MySqlConnector;
-using Cmr.Pecas.Acessorios.Service;
-using Cmr.Pecas.Acessorios.Service.Services;
-using System.Threading.Tasks;
-using Cmr.Pecas.Acessorios.Domain.Repositories;
 using Cmr.Pecas.Acessorios.Domain.DTO;
+using Cmr.Pecas.Acessorios.Domain.Repositories;
+using Cmr.Pecas.Acessorios.Service;
+using Cmr.Pecas.Acessorios.Service.BFF;
+using Cmr.Pecas.Acessorios.Service.Services;
+using Dapper;
+using Microsoft.AspNetCore.Mvc;
+using MySqlConnector;
+using System.Data;
+using System.Threading.Tasks;
 
 namespace cmr_pecas_acessorios_api.Controllers;
 
@@ -16,6 +17,7 @@ public class DashboardProdutosController : ControllerBase
 {
     private readonly ProdutoService _produtoService;
     private readonly CategoriaService _categoriaService;
+    private readonly UseCaseAtualizarInfoProdutos _useCaseAtualizarInfoProdutos;
 
     private static readonly string[] Summaries = new[]
     {
@@ -24,11 +26,12 @@ public class DashboardProdutosController : ControllerBase
 
     private readonly ILogger<DashboardProdutosController> _logger;
 
-    public DashboardProdutosController(ILogger<DashboardProdutosController> logger, ProdutoService produtoService, CategoriaService categoriaService)
+    public DashboardProdutosController(ILogger<DashboardProdutosController> logger, ProdutoService produtoService, CategoriaService categoriaService, UseCaseAtualizarInfoProdutos useCaseAtualizarInfoProdutos)
     {
         _logger = logger;
         _produtoService = produtoService;
         _categoriaService = categoriaService;
+        _useCaseAtualizarInfoProdutos = useCaseAtualizarInfoProdutos;
     }
 
 
@@ -49,7 +52,8 @@ public class DashboardProdutosController : ControllerBase
         [FromBody] ObterTodosProdutosDto produto)
     {
        
-        await _produtoService.Update(produto);
+        //await _produtoService.Update(produto);
+        await _useCaseAtualizarInfoProdutos.Update(produto);
 
         return StatusCode(200, produto);
     }
