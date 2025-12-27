@@ -19,6 +19,9 @@ builder.Services.AddTransient<MarcaService>();
 builder.Services.AddTransient<IMargemLucroRepository, MargemLucroRepository>();
 builder.Services.AddTransient<MargemLucroService>();
 
+builder.Services.AddTransient<ICustoRepository, CustoRepository>();
+builder.Services.AddTransient<CustoService>();
+
 
 builder.Services.AddTransient<UseCaseAtualizarInfoProdutos>();
 

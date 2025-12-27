@@ -6,5 +6,5 @@
     public string descricao { get; set; }
     public decimal custo { get; set; }
     public DateTime data_insercao { get; set; }
-    public DateTime data_desativacao { get; set; }
+    public DateTime? data_desativacao { get; set; }
 }
